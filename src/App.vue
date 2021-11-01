@@ -1,26 +1,40 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <teams-list :teams="teams"></teams-list>
+  </div>
+  <router-view/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  import TeamsList from './components/TeamsList.vue';
+  import axios from 'axios';
+  export default {
+    components:{
+      TeamsList
+    },
+    data(){
+      return{
+        teams:[]
+      }
+    },
+    methods:{
+      async fetchTeams(){
+        try{
+          const response = await axios.get('https://www.balldontlie.io/api/v1/teams?per_page=10');
+          this.teams = response.data.data;
+        }
+        catch(e){
+          console.log("Error");
+        }
+      }
+    },
+    mounted(){
+      this.fetchTeams();
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+
 </style>
