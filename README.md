@@ -1,4 +1,4 @@
-# nba
+# NBA-Api
 
 ## Project setup
 ```
