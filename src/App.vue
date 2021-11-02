@@ -40,27 +40,38 @@
         selectedSort: '',
         searchQuery: '',
         sortOptions: [
-          {value: 'abbreviation', name: "Abbreviation"},
-          {value: 'conference', name: "Conference"},
-          {value: 'division', name: "Division"},
-          {value: 'name', name: "Name"},
+          {value: 'tricode', name: "Tricode"},
+          {value: 'confName', name: "Conference"},
+          {value: 'divName', name: "Division"},
+          {value: 'nickname', name: "Name"},
         ]
       }
     },
     methods:{
+      async fetchPlayers(){
+        try{
+          const response = await axios.get('https://data.nba.net/data/10s/prod/v1/2021/players.json');
+          this.players = response.data.league.standard;
+          console.log(this.players[0]);
+        } catch(e){
+          console.log(e);
+        }
+      },
       async fetchTeams(){
         try{
           this.isTeamLoading = true;
-          const response = await axios.get('https://www.balldontlie.io/api/v1/teams?per_page=10');
-          this.teams = response.data.data;
+          const response = await axios.get('https://data.nba.net/data/10s/prod/v1/2021/teams.json');
+          this.teams = response.data.league.standard;
+          console.log(this.teams);
         } catch(e){
-          console.log("Error");
+          console.log(e);
         } finally{
           this.isTeamLoading = false;
         }
       }
     },
     mounted(){
+      this.fetchPlayers();
       this.fetchTeams();
     },
     computed:{
@@ -68,7 +79,7 @@
         return[...this.teams].sort((team1, team2) => team1[this.selectedSort]?.localeCompare(team2[this.selectedSort]))
       },
       sortedAndSearchedTeams(){
-        return this.sortedTeams.filter(team => team.full_name.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        return this.sortedTeams.filter(team => team.fullName.toLowerCase().includes(this.searchQuery.toLowerCase()))
       }
     }
   }
