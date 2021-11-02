@@ -118,7 +118,7 @@ export default {
 
   margin-right: 24px;
 
-  background: #d6d6d6;
+  background: #ececec;
   box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.25);
   border-radius: 88px;
 
