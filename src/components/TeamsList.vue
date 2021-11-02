@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div id="teams-container">
-      <div class="teams" v-for="team in teams" v-bind:key="team.id">
+    <div id="teams-container" v-if="teams.length > 0">
+      <div class="teams" v-for="team in teams" v-bind:key="team.teamId">
         <div class="card card--team">
           <div class="card--team__contents">
             <div class="contents__main">
               <div class="team-logo">
-                <img class="team-logo__img" :src="getTeamLogo(team.id)" alt="Team's Logo">
+                <img class="team-logo__img" :src="getTeamLogo(team.teamId)" alt="Team's Logo">
               </div>
               <div class="team-names">
                 <div class="team-names--cityname">
@@ -14,13 +14,13 @@
                     <p>{{ team.city }}</p>
                   </div>
                   <div>
-                    <strong>{{ team.name }}</strong>
+                    <strong>{{ team.nickname }}</strong>
                   </div>
                 </div>
                 <div class="team-names--fullname">
                   <div>
                     <i
-                      ><a>{{ team.full_name }}</a></i
+                      ><a>{{ team.fullName }}</a></i
                     >
                   </div>
                 </div>
@@ -31,15 +31,15 @@
               <div class="specs">
                 <div class="spec">
                   <img class="spec__icon" src="../assets/icons/abbr.svg" alt="Abbreviation Icon"/>
-                  <div class="spec__text">{{ team.abbreviation }}</div>
+                  <div class="spec__text">{{ team.tricode }}</div>
                 </div>
                 <div class="spec">
                   <img class="spec__icon" src="../assets/icons/conf.svg" alt="Conference Icon"/>
-                  <div class="spec__text">{{ team.conference }}</div>
+                  <div class="spec__text">{{ team.confName }}</div>
                 </div>
                 <div class="spec">
                   <img class="spec__icon" src="../assets/icons/div.svg" alt="Division Icon"/>
-                  <div class="spec__text">{{ team.division }}</div>
+                  <div class="spec__text">{{ team.divName }}</div>
                 </div>
               </div>
             </div>
@@ -47,6 +47,10 @@
         </div>
       </div>
     </div>
+    <div class="no-teams" v-else>
+      <div class="no-teams__text">Sorry, there are no teams found...</div>
+      <img class="no-teams__img" src="../assets/svg/not-found.svg">
+      </div>
   </div>
 </template>
 
@@ -59,8 +63,8 @@ export default {
     },
   },
   methods:{
-    getTeamLogo(id){
-      return 'https://avatars.dicebear.com/api/jdenticon/' + id + '.svg';
+    getTeamLogo(teamId){
+      return 'https://avatars.dicebear.com/api/jdenticon/' + teamId + '.svg';
     }
   }
 };
@@ -180,5 +184,23 @@ export default {
   line-height: 25px;
 }
 
+.no-teams{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-teams__text{
+  font-size: 36px;
+  font-weight: bold;
+  color: #6a6a6a;
+  margin: 50px;
+}
+
+.no-teams__img{
+  width: 300px;
+  opacity: 90%;
+}
 
 </style>
