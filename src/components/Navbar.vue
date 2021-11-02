@@ -8,7 +8,7 @@
         </div>
         <div class="hl-navbar"></div>
         <div class="nav-btns" v-for="link in links" :key="link.title">
-            <a class="nav-btn" :href="link.href">{{ link.title }}</a>
+            <a class="nav-btn" :href="link.href" target="_blank">{{ link.title }}</a>
         </div>
     </div>
     <div class="navbar-bg"></div>
@@ -26,7 +26,7 @@
                 ],
                 links:[
                     {title: 'GitHub', href: 'https://github.com/ryzzzin/NBA-Api'},
-                    {title: 'API', href: 'https://balldontlie.io'}
+                    {title: 'API', href: 'https://github.com/kshvmdn/nba.js/blob/master/docs/api/DATA.md'}
                 ],
                 currentPage: 'Teams'
             }
