@@ -5,7 +5,9 @@
         <div class="card card--team">
           <div class="card--team__contents">
             <div class="contents__main">
-              <div class="team-logo"></div>
+              <div class="team-logo">
+                <img class="team-logo__img" :src="getTeamLogo(team.id)" alt="Team's Logo">
+              </div>
               <div class="team-names">
                 <div class="team-names--cityname">
                   <div>
@@ -28,15 +30,15 @@
               <div class="line vl--team"></div>
               <div class="specs">
                 <div class="spec">
-                  <img class="spec__icon" src="../assets/icons/abbr.svg" />
+                  <img class="spec__icon" src="../assets/icons/abbr.svg" alt="Abbreviation Icon"/>
                   <div class="spec__text">{{ team.abbreviation }}</div>
                 </div>
                 <div class="spec">
-                  <img class="spec__icon" src="../assets/icons/conf.svg" />
+                  <img class="spec__icon" src="../assets/icons/conf.svg" alt="Conference Icon"/>
                   <div class="spec__text">{{ team.conference }}</div>
                 </div>
                 <div class="spec">
-                  <img class="spec__icon" src="../assets/icons/div.svg" />
+                  <img class="spec__icon" src="../assets/icons/div.svg" alt="Division Icon"/>
                   <div class="spec__text">{{ team.division }}</div>
                 </div>
               </div>
@@ -56,35 +58,25 @@ export default {
       required: true,
     },
   },
+  methods:{
+    getTeamLogo(id){
+      return 'https://avatars.dicebear.com/api/jdenticon/' + id + '.svg';
+    }
+  }
 };
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 #teams-container{
-  display: -webkit-flex;
-  -webkit-flex-direction: row;
-  -webkit-flex-wrap: wrap;
-  width: 1605px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 1590px;
   height: auto;
   min-height: 200px;
 }
-
-#teams-container .teams{
-  -webkit-flex: 130px 1;
-}
-
-#teams-container .box.bigger {
-    -webkit-flex: 330px 1;
-}
-
 
 .card {
   background: #f6f6f6;
@@ -97,7 +89,7 @@ export default {
 
 .card--team {
   padding: 13px 22px 13px 22px;
-  margin: 30px;
+  margin: 30px 5px 5px 30px;
 
   width: 735px;
   height: 192px;
@@ -125,6 +117,14 @@ export default {
   background: #d6d6d6;
   box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.25);
   border-radius: 88px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-logo__img{
+  width: 110px;
 }
 
 .team-names {
