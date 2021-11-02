@@ -1,6 +1,10 @@
 <template>
   <div>
-    <teams-list :teams="teams"></teams-list>
+    <navbar></navbar>
+    <div class="contents">
+      <teams-list :teams="teams"></teams-list>
+    </div>
+    <help></help>
   </div>
   <router-view/>
 </template>
@@ -9,9 +13,11 @@
 
   import TeamsList from './components/TeamsList.vue';
   import axios from 'axios';
+  import Navbar from './components/Navbar.vue';
+  import Help from './components/Help.vue'
   export default {
     components:{
-      TeamsList
+      TeamsList, Navbar, Help
     },
     data(){
       return{
@@ -35,6 +41,21 @@
   }
 </script>
 
-<style scoped>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  body{
+    position: relative;
+    background: url('assets/pattern.jpg'), #F6F6F6;
+    background-blend-mode: soft-light, normal;
+    background-size: 31%;
+  }
+  .contents{
+    margin-left: 330px
+  }
 </style>
