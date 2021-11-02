@@ -73,7 +73,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 1590px;
+  width: 1520px;
   height: auto;
   min-height: 200px;
 }
@@ -89,7 +89,7 @@ export default {
 
 .card--team {
   padding: 13px 22px 13px 22px;
-  margin: 30px 5px 5px 30px;
+  margin: 30px 25px 5px 0px;
 
   width: 735px;
   height: 192px;
