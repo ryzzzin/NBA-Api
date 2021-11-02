@@ -6,23 +6,7 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                pages:[
-                    {title: 'Teams'},
-                    {title: 'Players'},
-                    {title: 'Games'},
-                    {title: 'About'}
-                ],
-                links:[
-                    {title: 'GitHub', href: 'https://github.com/ryzzzin/NBA-Api'},
-                    {title: 'API', href: 'https://balldontlie.io'}
-                ],
-                currentPage: 'Teams'
-            }
-        }
-    }
+    
 </script>
 
 <style scoped>
@@ -32,8 +16,8 @@
 
     position: fixed;
     z-index: 1;
-    top: 990px;
-    left: 1640px;
+    top: 90%;
+    left: 85%;
     overflow-x: hidden;
 
     background: rgba(246, 246, 246, 0.75);
