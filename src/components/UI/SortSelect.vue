@@ -1,5 +1,5 @@
 <template>
-    <select :value="modelValue" @change="changeOption">
+    <select class="select minimal" :value="modelValue" @change="changeOption">
         <option disabled value="">Choose</option>
         <option
             v-for="option in options"
@@ -31,6 +31,42 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.select{
+    background: #eeeeee;
+    color: #6a6a6a;
+    height: 45px;
+    width: 200px;
+    
+    font-size: 18px;
+    font-weight: bold;
 
+    border: 3px solid #c4c4c4;
+    border-radius: 8px;
+
+    padding-left: 14px;
+    padding-right: 20px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.select:focus{
+    outline: none;
+}
+
+select.minimal {
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 23px) calc(1em),
+    calc(100% - 19px) calc(1em),
+    calc(100% - 2.5em) 0.35em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+}
 </style>
