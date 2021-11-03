@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="contents">
       <div class="contents__search">
         <search-input v-model="searchQuery" />
@@ -25,20 +24,15 @@
         <img class="loading__img" src="@/assets/svg/loading.svg" />
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 import axios from "axios";
 import TeamsList from "@/components/TeamsList.vue";
-import SortSelect from "@/components/UI/SortSelect.vue";
-import SearchInput from "@/components/UI/SearchInput.vue";
 
 export default {
   components: {
     TeamsList,
-    SortSelect,
-    SearchInput,
   },
   data() {
     return {
@@ -64,17 +58,6 @@ export default {
     };
   },
   methods: {
-    async fetchPlayers() {
-      try {
-        const response = await axios.get(
-          "https://data.nba.net/data/10s/prod/v1/2021/players.json"
-        );
-        this.players = response.data.league.standard;
-        console.log(this.players[0]);
-      } catch (e) {
-        console.log(e);
-      }
-    },
     async fetchTeams(year) {
       try {
         this.isTeamLoading = true;
@@ -91,7 +74,6 @@ export default {
     },
   },
   mounted() {
-    this.fetchPlayers();
     this.fetchTeams("2021");
   },
   computed: {
@@ -117,9 +99,6 @@ export default {
 <style>
 
 .contents {
-  margin-left: 330px;
-  padding-top: 50px;
-  padding-left: 50px;
   display: flex;
   flex-direction: column;
 }
