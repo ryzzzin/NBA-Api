@@ -1,15 +1,21 @@
-import Main from '@/pages/Main';
+import Main from '@/pages/Main'
 import Teams from '@/pages/Teams'
+import Players from '@/pages/Players'
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
     {
-        path: '/main',
+        path: '/',
+        alias: '/main',
         component: Main
     },
     {
-        path: '/Teams',
+        path: '/teams',
         component: Teams
+    },
+    {
+        path: '/players',
+        component: Players
     },
 ]
 
