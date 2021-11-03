@@ -1,10 +1,10 @@
-import Main from '../pages/Main';
-import Teams from '../pages/Teams'
+import Main from '@/pages/Main';
+import Teams from '@/pages/Teams'
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
     {
-        path: '/',
+        path: '/main',
         component: Main
     },
     {
