@@ -16,7 +16,10 @@
         :teams="sortedAndSearchedTeams"
         v-if="!isTeamLoading"
       />
-      <div class="loading" v-else>Loading...</div>
+      <div class="loading" v-else>
+        <div class="loading__text">Loading...</div>
+        <img class="loading__img" src="./assets/svg/loading.svg">
+      </div>
     </div>
     <help></help>
   </div>
@@ -39,6 +42,7 @@
     data(){
       return{
         teams:[],
+        isTeamLoading: false,
         selectedYear: '2021',
         selectedSort: '',
         searchQuery: '',
@@ -70,11 +74,14 @@
       },
       async fetchTeams(year){
         try{
+          this.isTeamLoading = true
           const response = await axios.get('https://data.nba.net/data/10s/prod/v1/' + year + '/teams.json');
           this.teams = response.data.league.standard;
           console.log(this.teams);
         } catch(e){
           console.log(e);
+        } finally{
+          this.isTeamLoading = false;
         }
       }
     },
@@ -149,5 +156,24 @@
 
   .teams-sort{
     margin-right: 50px;
+  }
+
+  .loading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  } 
+
+  .loading__text{
+    font-size: 36px;
+    font-weight: bold;
+    color: #6a6a6a;
+    margin: 50px;
+  }
+
+  .loading__img{
+    width: 300px;
+    opacity: 90%;
   }
 </style>
