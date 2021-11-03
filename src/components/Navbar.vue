@@ -68,7 +68,7 @@ export default {
 
 <style scoped>
 .navbar {
-  width: 280px;
+  width: 14.6%;
   height: 100%;
 
   position: fixed;
@@ -84,12 +84,12 @@ export default {
   flex-direction: column;
 }
 .navbar-bg {
-  width: 35px;
+  width: 2%;
   height: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 280px;
+  left: 14.6%;
   overflow-x: hidden;
   background: #006bb7;
 }
@@ -138,7 +138,7 @@ export default {
 .hl-navbar {
   margin: 15px 0 40px 0;
   border-bottom: 2px solid #f6f6f6;
-  width: 230px;
+  width: 80%;
   align-self: center;
 }
 </style>

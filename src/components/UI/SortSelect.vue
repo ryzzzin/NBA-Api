@@ -41,7 +41,7 @@
     font-size: 18px;
     font-weight: bold;
 
-    border: 3px solid #c4c4c4;
+    border: 2px solid #c4c4c4;
     border-radius: 8px;
 
     padding-left: 14px;

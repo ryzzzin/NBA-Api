@@ -77,7 +77,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 1520px;
+  width: 100%;
   height: auto;
   min-height: 200px;
 }

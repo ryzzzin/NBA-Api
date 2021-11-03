@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <navbar />
-    <router-view></router-view>
+    <router-view class="content"></router-view>
     <help />
   </div>
 </template>
@@ -14,8 +14,7 @@ import Help from "@/components/Help.vue";
       Navbar, Help
     }
   }
-
-        Navbar</script>
+</script>
 
 <style>
 * {
@@ -31,6 +30,12 @@ body {
   background: url("assets/pattern.jpg"), #f6f6f6;
   background-blend-mode: soft-light, normal;
   background-size: 31%;
+}
+
+.content{
+  margin-left: 16.6%;
+  padding-top: 50px;
+  padding-left: 50px;
 }
 
 </style>

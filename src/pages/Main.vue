@@ -11,8 +11,5 @@
 </script>
 
 <style scoped>
-h1{
-    margin-left: 500px;
-    margin-top: 100px;
-}
+
 </style>
