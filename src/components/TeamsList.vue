@@ -2,7 +2,7 @@
   <div>
     <div id="teams-container" v-if="teams.length > 0">
       <div class="teams" v-for="team in teams" v-bind:key="team.teamId">
-        <div class="card card--team">
+        <div class="card--team">
           <div class="card--team__contents">
             <div class="contents__main">
               <div class="team-logo">
@@ -80,20 +80,19 @@ export default {
   width: 100%;
   height: auto;
   min-height: 200px;
+  margin: 0 0 30px 0;
 }
 
-.card {
+.card--team {
   background: #f6f6f6;
   border: 2px solid #c4c4c4;
   box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.25);
   border-radius: 24px;
 
   display: flex;
-}
 
-.card--team {
   padding: 13px 22px 13px 22px;
-  margin: 30px 25px 5px 0px;
+  margin: 25px 25px 0px 0px;
 
   width: 735px;
   height: 192px;

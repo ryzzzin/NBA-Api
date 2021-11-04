@@ -1,7 +1,7 @@
 <template>
     <div class="help">
         <div class="help__text">Any questions</div>
-        <button class="help__btn">?</button>
+        <div class="help__btn">?</div>
     </div>
 </template>
 
@@ -11,8 +11,8 @@
 
 <style scoped>
 .help{
-    width: 250px;
-    height: 60px;
+    width: 13vw;
+    height: 6vh;
 
     position: fixed;
     z-index: 1;
@@ -39,14 +39,18 @@
 }
 
 .help__btn{
-    width: 60px;
-    height: 60px;
+    width: 3.2vw;
+    height: 5.5vh;
     background: #212121;
     color: #f6f6f6;
     font-size: 30px;
 
     border: 0;
-    border-radius: 30px;
+    border-radius: 50%;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

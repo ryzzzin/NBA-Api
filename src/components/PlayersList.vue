@@ -2,7 +2,7 @@
   <div>
     <div id="players-container" v-if="players.length > 0">
       <div class="players" v-for="player in players.slice(0,30)" v-bind:key="player.playerId">
-        <div class="card card--player">
+        <div class="card--player">
           <div class="card--player__contents">
             <div class="contents__main">
               <div class="player-logo">
@@ -91,20 +91,18 @@ export default {
   width: 100%;
   height: auto;
   min-height: 200px;
+  margin: 0 0 30px 0;
 }
 
-.card {
+.card--player {
   background: #f6f6f6;
   border: 2px solid #c4c4c4;
   box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.25);
   border-radius: 24px;
-
   display: flex;
-}
 
-.card--player {
   padding: 13px 22px 13px 22px;
-  margin: 30px 25px 5px 0px;
+  margin: 25px 25px 0px 0px;
 
   width: 735px;
   height: 192px;

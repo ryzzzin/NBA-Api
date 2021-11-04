@@ -7,13 +7,13 @@
         <div class="page-name">Teams</div>
         <div class="teams-sort">
           <sort-select
-            v-model="selectedYear"
-            :options="yearOptions"
+            v-model="selectedSort"
+            :options="sortOptions"
             class="teams-sort"
           ></sort-select>
           <sort-select
-            v-model="selectedSort"
-            :options="sortOptions"
+            v-model="selectedYear"
+            :options="yearOptions"
             class="teams-sort"
           ></sort-select>
         </div>

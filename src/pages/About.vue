@@ -3,10 +3,22 @@
     <div class="page-name">About</div>
     <div class="about">
       <div class="about-preview">
-        <img class="about-preview-img" :src="impPath" alt="" />
+        <img
+          class="about-preview-img"
+          src="@/assets/images/about.jpeg"
+          alt=""
+        />
         <div class="about-preview-info">
-          <h1 class="about-header">{{ header }}</h1>
-          <p class="about-desc">{{ description }}</p>
+          <h1 class="about-header">About this project</h1>
+          <p class="about-desc">
+            This project was created with
+            <a class="vue-link" href="https://vuejs.org/" target="_blank">Vue</a> using the
+            <a href="https://nba.com" target="_blank">
+                <span class="letter--blue">N</span>B<span class="letter--red">A</span>
+            </a>
+            -API to create a client-side user interface for NBA basketball league
+            data.
+          </p>
         </div>
       </div>
     </div>
@@ -14,17 +26,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      header: "About this project",
-      description:
-        "This project was created with Vue using the BallDontLie API to create a client-side user interface for NBA basketball league data.",
-      impPath:
-        "https://cdnn21.img.ria.ru/images/07e5/01/02/1591805256_0:0:3072:1728_1920x0_80_0_0_fcbd9b6ca9db8cb6385b7f6fc412647e.jpg",
-    };
-  },
-};
+export default {};
 </script>
 
 <style scoped>
@@ -91,5 +93,21 @@ export default {
   background-blend-mode: multiply;
   background-color: black;
   color: white;
+  text-align: end;
+}
+
+.vue-link {
+  color: #41b883;
+}
+
+a{
+    color: white;
+}
+
+.letter--blue {
+  color: #006bb7;
+}
+.letter--red {
+  color: #ed174b;
 }
 </style>

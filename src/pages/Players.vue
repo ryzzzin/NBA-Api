@@ -12,15 +12,16 @@
             class="players-sort"
           ></sort-select>
           <sort-select
-            v-model="selectedYear"
-            :options="yearOptions"
-            class="players-sort"
-          ></sort-select>
-          <sort-select
             v-model="selectedSort"
             :options="sortOptions"
             class="players-sort"
           ></sort-select>
+          <sort-select
+            v-model="selectedYear"
+            :options="yearOptions"
+            class="players-sort"
+          ></sort-select>
+          
         </div>
       </div>
       <players-list :players="sortedAndSearchedPlayers" :teams="teams" v-if="!isPlayerLoading" />
