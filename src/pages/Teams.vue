@@ -65,7 +65,6 @@ export default {
           "https://data.nba.net/data/10s/prod/v1/" + year + "/teams.json"
         );
         this.teams = response.data.league.standard;
-        console.log(this.teams);
       } catch (e) {
         console.log(e);
       } finally {

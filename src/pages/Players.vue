@@ -83,7 +83,6 @@ export default {
           "https://data.nba.net/data/10s/prod/v1/" + year + "/players.json"
         );
         this.players = response.data.league.standard;
-        console.log(this.players[0]);
       } catch (e) {
         console.log(e);
       } finally {
@@ -96,7 +95,6 @@ export default {
           "https://data.nba.net/data/10s/prod/v1/" + year + "/teams.json"
         );
         this.teams = response.data.league.standard;
-        console.log(this.teams[0])
       } catch (e) {
         console.log(e);
       }
