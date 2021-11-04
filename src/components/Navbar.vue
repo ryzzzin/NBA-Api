@@ -16,7 +16,6 @@
       <router-link
         class="none-link"
         :to="page.title.toLowerCase()"
-        @click="currentPage = page.title"
       >
         <div class="nav-btn">
           <div
@@ -52,17 +51,14 @@ export default {
           href: "https://github.com/kshvmdn/nba.js/blob/master/docs/api/DATA.md",
         },
       ],
-      currentPage: "",
+      currentPage: ""
     };
   },
-  methods:{
-      getCurrentPage(){
-        this.currentPage = window.location.pathname.substring(1);
-      }
-  },
-  mounted(){
-      this.getCurrentPage();
-  }
+  watch:{
+    $route (to){
+        this.currentPage = to.path.substring(1);
+    }
+  } 
 };
 </script>
 
@@ -101,7 +97,7 @@ export default {
 }
 
 .none-link{
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .letter--blue {
