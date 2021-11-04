@@ -16,8 +16,8 @@
 
     position: fixed;
     z-index: 1;
-    top: 90%;
-    left: 85%;
+    top: 91vh;
+    left: 86vw;
     overflow-x: hidden;
 
     background: rgba(246, 246, 246, 0.75);
