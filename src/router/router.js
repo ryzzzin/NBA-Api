@@ -1,6 +1,7 @@
 import Main from '@/pages/Main'
 import Teams from '@/pages/Teams'
 import Players from '@/pages/Players'
+import About from '@/pages/About'
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -16,6 +17,10 @@ const routes = [
     {
         path: '/players',
         component: Players
+    },
+    {
+        path: '/about',
+        component: About
     },
 ]
 
