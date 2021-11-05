@@ -2,6 +2,7 @@
   <div class="app">
     <navbar />
     <router-view class="content"></router-view>
+    <top-btn id="topBtn"/>
     <help />
   </div>
 </template>
@@ -9,11 +10,31 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Help from "@/components/Help.vue";
-  export default {
-    components:{
-      Navbar, Help
+import TopBtn from "@/components/TopBtn.vue";
+
+export default {
+  components:{
+    Navbar, Help, TopBtn
+  },
+  data(){
+    return{
+      topBtn: Object
     }
+  },
+  methods:{
+    scrollFunction() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        this.topBtn.style.display = "flex";
+      } else {
+        this.topBtn.style.display = "none";
+      }
+    }
+  },
+  mounted(){
+    this.topBtn = document.getElementById("topBtn");
+    window.onscroll = () => this.scrollFunction();
   }
+}
 </script>
 
 <style>
