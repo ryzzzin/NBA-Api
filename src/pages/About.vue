@@ -62,7 +62,7 @@ export default {};
 }
 .about-preview-img {
   object-fit: cover;
-  width: 50%;
+  width: 54%;
   height: 100%;
   transition: 1s;
 }
