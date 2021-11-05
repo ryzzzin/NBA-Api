@@ -10,9 +10,9 @@
                 <img src="@/assets/svg/teams.svg" class="page-img">
                 <div class="page-name">Teams</div>
             </router-link>
-            <router-link :to="'/games'" class="pages-link">
-                <img src="@/assets/svg/games.svg" class="page-img">
-                <div class="page-name">Games</div>
+            <router-link :to="'/about'" class="pages-link">
+                <img src="@/assets/svg/about.svg" class="page-img">
+                <div class="page-name">About</div>
             </router-link>
         </div>
     </div>
