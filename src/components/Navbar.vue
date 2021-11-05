@@ -41,7 +41,6 @@ export default {
       pages: [
         { title: "Teams" },
         { title: "Players" },
-        { title: "Games" },
         { title: "About" },
       ],
       links: [
