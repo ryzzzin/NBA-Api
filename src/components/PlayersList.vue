@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="players-container" v-if="players.length > 0">
-      <div class="players" v-for="player in players.slice(0,30)" v-bind:key="player.playerId">
+      <div class="players" v-for="player in players.slice(0, playersNumber)" v-bind:key="player.playerId">
         <div class="card--player">
           <div class="card--player__contents">
             <div class="contents__main">
@@ -50,12 +50,20 @@
     <div class="no-players" v-else>
       <div class="no-players__text">Sorry, there are no players found...</div>
       <img class="no-players__img" src="../assets/svg/not-found.svg">
-      </div>
+    </div>
+    <div v-intersection="loadMorePlayers" class="observer"></div>
   </div>
 </template>
 
 <script>
 export default {
+  data(){
+    return{
+      playersNumber: 0,
+      initialPlayersNumber: 30,
+      addingPlayersNumber: 10,
+    }
+  },
   props: {
     players: {
       type: Array,
@@ -76,13 +84,31 @@ export default {
         if(team.teamId == teamId) teamName = team.fullName
       });
       return teamName;
+    },
+    loadMorePlayers(){
+      this.playersNumber += this.addingPlayersNumber;
+    },
+    unloadPlayers(){
+      this.playersNumber = this.initialPlayersNumber;
     }
+  },
+  watch:{
+    players(){
+      this.playersNumber = 30;
+      console.log("set quantity default")
+    }
+  },
+  mounted(){
+    this.playersNumber = this.initialPlayersNumber;
   }
 };
 </script>
 
 <style scoped>
-
+.observer{
+  /* background: red; */
+  height: 30px;
+}
 
 #players-container{
   display: flex;
