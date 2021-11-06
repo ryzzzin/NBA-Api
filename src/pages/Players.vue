@@ -77,28 +77,21 @@ export default {
     };
   },
   methods: {
-    async fetchPlayers(year) {
-      try {
-        this.isPlayerLoading = true;
-        const response = await axios.get(
-          "https://data.nba.net/data/10s/prod/v1/" + year + "/players.json"
-        );
+    fetchPlayers(year) {
+      this.isPlayerLoading = true;
+      axios.get(
+        "https://data.nba.net/data/10s/prod/v1/" + year + "/players.json"
+      ).then(response => {
         this.players = response.data.league.standard;
-      } catch (e) {
-        console.log(e);
-      } finally {
         this.isPlayerLoading = false;
-      }
+      })
     },
     async fetchTeams(year) {
-      try {
-        const response = await axios.get(
+      axios.get(
           "https://data.nba.net/data/10s/prod/v1/" + year + "/teams.json"
-        );
-        this.teams = response.data.league.standard;
-      } catch (e) {
-        console.log(e);
-      }
+        ).then(response => {
+          this.teams = response.data.league.standard;
+        })
     }
   },
   mounted() {

@@ -9,13 +9,13 @@
           <sort-select
             v-model="selectedSort"
             :options="sortOptions"
-            class="teams-sort"
-          ></sort-select>
+            class="teams-sort">
+          </sort-select>
           <sort-select
             v-model="selectedYear"
             :options="yearOptions"
-            class="teams-sort"
-          ></sort-select>
+            class="teams-sort">
+          </sort-select>
         </div>
       </div>
       <teams-list :teams="sortedAndSearchedTeams" v-if="!isTeamLoading" />
@@ -54,22 +54,18 @@ export default {
         { value: "confName", name: "Conference" },
         { value: "divName", name: "Division" },
         { value: "nickname", name: "Name" },
-      ],
+      ]
     };
   },
   methods: {
-    async fetchTeams(year) {
-      try {
-        this.isTeamLoading = true;
-        const response = await axios.get(
-          "https://data.nba.net/data/10s/prod/v1/" + year + "/teams.json"
-        );
+    fetchTeams(year) {
+      this.isTeamLoading = true;
+      axios.get(
+        "https://data.nba.net/data/10s/prod/v1/" + year + "/teams.json"
+      ).then(response => {
         this.teams = response.data.league.standard;
-      } catch (e) {
-        console.log(e);
-      } finally {
         this.isTeamLoading = false;
-      }
+      });
     },
   },
   mounted() {
