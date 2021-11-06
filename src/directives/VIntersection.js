@@ -5,12 +5,9 @@ export default{
             threshold: 0.1
         }
         const callback = (entries) => {
-        if(entries[0].isIntersecting){
-            binding.value();
-            console.log(true)
-        }
-        else console.log(false)
-        //console.log(this.players)
+            if(entries[0].isIntersecting){
+                binding.value();
+            }
         }
         const observer = new IntersectionObserver(callback, options);
         observer.observe(el);
