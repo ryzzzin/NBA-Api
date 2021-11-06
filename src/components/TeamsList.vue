@@ -2,7 +2,7 @@
   <div>
     <div id="teams-container" v-if="teams.length > 0">
       <div class="teams" v-for="team in teams" v-bind:key="team.teamId">
-        <div class="card--team">
+        <router-link class="card--team" :to="'/teams/' + team.urlName">
           <div class="card--team__contents">
             <div class="contents__main">
               <div class="team-logo">
@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
     <div class="no-teams" v-else>
@@ -98,6 +98,8 @@ export default {
   height: 192px;
 
   align-items: center;
+
+  text-decoration: none;
 }
 
 .card--team__contents {
