@@ -1,56 +1,62 @@
 <template>
   <div>
-    <div id="teams-container" v-if="teams">
-      <div class="teams">
-        <div class="card--team">
-          <div class="card--team__contents">
-            <div class="contents__main">
-              <div class="team-logo">
-                <img class="team-logo__img" :src="getTeamLogo(team.teamId)" alt="Team's Logo">
+    <div v-if="!isTeamLoading">
+      <div id="teams-container" v-if="teams">
+        <div class="teams">
+          <div class="card--team">
+            <div class="card--team__contents">
+              <div class="contents__main">
+                <div class="team-logo">
+                  <img class="team-logo__img" :src="getTeamLogo(team.teamId)" alt="Team's Logo">
+                </div>
+                <div class="team-names">
+                  <div class="team-names--cityname">
+                    <div>
+                      <p>{{ team.city }}</p>
+                    </div>
+                    <div>
+                      <strong>{{ team.nickname }}</strong>
+                    </div>
+                  </div>
+                  <div class="team-names--fullname">
+                    <div>
+                      <i
+                        ><a>{{ team.fullName }}</a></i
+                      >
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="team-names">
-                <div class="team-names--cityname">
-                  <div>
-                    <p>{{ team.city }}</p>
+              <div class="team-specs">
+                <div class="line vl--team"></div>
+                <div class="specs">
+                  <div class="spec">
+                    <img class="spec__icon" src="../assets/icons/abbr.svg" alt="Abbreviation Icon"/>
+                    <div class="spec__text">{{ team.tricode }}</div>
                   </div>
-                  <div>
-                    <strong>{{ team.nickname }}</strong>
+                  <div class="spec">
+                    <img class="spec__icon" src="../assets/icons/conf.svg" alt="Conference Icon"/>
+                    <div class="spec__text">{{ team.confName }}</div>
                   </div>
-                </div>
-                <div class="team-names--fullname">
-                  <div>
-                    <i
-                      ><a>{{ team.fullName }}</a></i
-                    >
+                  <div class="spec">
+                    <img class="spec__icon" src="../assets/icons/div.svg" alt="Division Icon"/>
+                    <div class="spec__text">{{ team.divName }}</div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="team-specs">
-              <div class="line vl--team"></div>
-              <div class="specs">
-                <div class="spec">
-                  <img class="spec__icon" src="../assets/icons/abbr.svg" alt="Abbreviation Icon"/>
-                  <div class="spec__text">{{ team.tricode }}</div>
-                </div>
-                <div class="spec">
-                  <img class="spec__icon" src="../assets/icons/conf.svg" alt="Conference Icon"/>
-                  <div class="spec__text">{{ team.confName }}</div>
-                </div>
-                <div class="spec">
-                  <img class="spec__icon" src="../assets/icons/div.svg" alt="Division Icon"/>
-                  <div class="spec__text">{{ team.divName }}</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="no-teams" v-else>
-      <div class="no-teams__text">Sorry, there are no teams found...</div>
-      <img class="no-teams__img" src="../assets/svg/not-found.svg">
+      <div class="no-teams" v-else>
+        <div class="no-teams__text">Sorry, there are no teams found...</div>
+        <img class="no-teams__img" src="../assets/svg/not-found.svg">
       </div>
+    </div>
+    <div class="loading" v-else>
+      <div class="loading__text">Loading...</div>
+      <img class="loading__img" src="@/assets/svg/loading.svg" />
+    </div>
   </div>
 </template>
 
@@ -60,11 +66,13 @@ export default {
   data(){
     return{
       teams: [],
-      team: Object
+      team: Object,
+      isTeamLoading: false
     }
   },
   methods:{
     async fetchTeams(year) {
+      this.isTeamLoading = true;
       axios.get(
           "https://data.nba.net/data/10s/prod/v1/" + year + "/teams.json"
         ).then(response => {
@@ -81,6 +89,7 @@ export default {
           catch(e){
             if (e !== BreakException) throw e;
           }
+          this.isTeamLoading = false;
         }
       )
     },
