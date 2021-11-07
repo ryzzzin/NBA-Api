@@ -3,7 +3,7 @@
     <router-link
       class="none-link"
       to="/main"
-      @click="currentPage = 'main'"
+      @click="currentPath = 'main'"
     >
       <div class="logo">
         <span class="letter letter--blue">N</span>
@@ -15,14 +15,19 @@
     <div class="nav-btns" v-for="page in pages" :key="page.title">
       <router-link
         class="none-link"
-        :to="page.title.toLowerCase()"
+        :to="'/' + page.title.toLowerCase()"
       >
         <div class="nav-btn">
           <div
             class="current-page-indicator"
-            v-if="currentPage.toLowerCase() == page.title.toLowerCase()"
+            :style="{ opacity: isCurrentPage(page.title) ? '100%' : '0%' }"
           ></div>
-          {{ page.title }}
+          <div 
+            class="nav-btn__text"
+            :style="{ margin: isCurrentPage(page.title) ? '10px' : '0' }"
+          >
+            {{ page.title }}
+          </div>
         </div>
       </router-link>
     </div>
@@ -50,12 +55,17 @@ export default {
           href: "https://github.com/kshvmdn/nba.js/blob/master/docs/api/DATA.md",
         },
       ],
-      currentPage: ""
+      currentPath: ""
     };
+  },
+  methods:{
+    isCurrentPage(pageTitle){
+        return this.currentPath.toLowerCase() == pageTitle.toLowerCase();
+    }
   },
   watch:{
     $route (to){
-        this.currentPage = to.path.substring(1);
+        this.currentPath = to.path.substring(1);
     }
   } 
 };
@@ -128,6 +138,11 @@ export default {
   margin-right: 12px;
   background: #ed174b;
   border-radius: 100%;
+  transition: 0.5s;
+}
+
+.nav-btn__text{
+    transition: 0.5s;
 }
 
 .hl-navbar {
