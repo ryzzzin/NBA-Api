@@ -103,11 +103,6 @@ export default {
   align-self: flex-end;
 }
 
-.loading {
-  margin: 50px;
-  font-size: 24px;
-}
-
 .contents__header {
   margin-top: 30px;
 
@@ -130,6 +125,8 @@ export default {
 }
 
 .loading {
+  margin: 50px;
+  font-size: 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -144,7 +141,7 @@ export default {
 }
 
 .loading__img {
-  width: 300px;
+  width: 200px;
   opacity: 90%;
 }
 </style>

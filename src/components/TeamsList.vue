@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="teams-container" v-if="teams.length > 0">
-      <div class="teams" v-for="team in teams" v-bind:key="team.teamId">
+      <div class="teams" v-for="team in teams" :key="team.teamId">
         <router-link class="card--team" :to="'/teams/' + team.urlName">
           <div class="card--team__contents">
             <div class="contents__main">

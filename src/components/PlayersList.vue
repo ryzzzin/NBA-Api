@@ -94,8 +94,7 @@ export default {
   },
   watch:{
     players(){
-      this.playersNumber = 30;
-      console.log("set quantity default")
+      this.unloadPlayers()
     }
   },
   mounted(){
