@@ -1,97 +1,86 @@
 <template>
-  <div>
+  <div class="contents">
+    <div class="contents__search">
+      <search-input v-model="searchQuery" />
+    </div>
+    <div class="contents__header">
+      <div class="page-name">Teams</div>
+    </div>
     <div v-if="!isTeamLoading">
-      <div v-if="team" class="card">
+      <div v-if="getTeam" class="card">
         <div class="card__top">
-          <div class="contents__main">
-            <div class="team-logo">
-              <img
-                class="team-logo__img"
-                :src="getTeamLogo(team.teamId)"
-                alt="Team's Logo"
-              />
-            </div>
-            <div class="team-names">
-              <div class="team-names--cityname">
-                <div>
-                  <p>{{ team.city }}</p>
+          <div class="top-container">
+            <div class="contents__main">
+              <div class="team-logo">
+                <img
+                  class="team-logo__img"
+                  :src="getTeamLogo(getTeam.teamId)"
+                  alt="Team's Logo"
+                />
+              </div>
+              <div class="team-names">
+                <div class="team-names--cityname">
+                  <div>
+                    <p>{{ getTeam.city }}</p>
+                  </div>
+                  <div>
+                    <strong>{{ getTeam.nickname }}</strong>
+                  </div>
                 </div>
-                <div>
-                  <strong>{{ team.nickname }}</strong>
+                <div class="team-names--fullname">
+                  <div>
+                    <i
+                      ><a>{{ getTeam.fullName }}</a></i
+                    >
+                  </div>
                 </div>
               </div>
-              <div class="team-names--fullname">
-                <div>
-                  <i
-                    ><a>{{ team.fullName }}</a></i
-                  >
+            </div>
+            <div class="team-specs">
+              <div class="vl vl--specs"></div>
+              <div class="specs">
+                <div class="spec">
+                  <img
+                    class="spec__icon"
+                    src="../assets/icons/abbr.svg"
+                    alt="Abbreviation Icon"
+                  />
+                  <div class="spec__text">{{ getTeam.tricode }}</div>
+                </div>
+                <div class="spec">
+                  <img
+                    class="spec__icon"
+                    src="../assets/icons/conf.svg"
+                    alt="Conference Icon"
+                  />
+                  <div class="spec__text">{{ getTeam.confName }}</div>
+                </div>
+                <div class="spec">
+                  <img
+                    class="spec__icon"
+                    src="../assets/icons/div.svg"
+                    alt="Division Icon"
+                  />
+                  <div class="spec__text">{{ getTeam.divName }}</div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="team-specs">
-            <div class="vl vl--specs"></div>
-            <div class="specs">
-              <div class="spec">
-                <img
-                  class="spec__icon"
-                  src="../assets/icons/abbr.svg"
-                  alt="Abbreviation Icon"
-                />
-                <div class="spec__text">{{ team.tricode }}</div>
-              </div>
-              <div class="spec">
-                <img
-                  class="spec__icon"
-                  src="../assets/icons/conf.svg"
-                  alt="Conference Icon"
-                />
-                <div class="spec__text">{{ team.confName }}</div>
-              </div>
-              <div class="spec">
-                <img
-                  class="spec__icon"
-                  src="../assets/icons/div.svg"
-                  alt="Division Icon"
-                />
-                <div class="spec__text">{{ team.divName }}</div>
-              </div>
-            </div>
+          <div class="top-container">
+            <router-link to="/teams">
+              <default-button class="teams-button">All teams</default-button>
+            </router-link>
+            <default-button class="teams-button">All the matches</default-button>
           </div>
-          <default-button class="teams-button">Go to all teams</default-button>
         </div>
         <div class="hl hl--team"></div>
         <div class="card__bottom">
           <div class="card-bottom__container roaster">
             <div class="card-bottom-container__header">Roaster</div>
             <div class="roaster__players">
-              <div class="player">
-                <div class="player__position">G</div>
-                <div class="player__name">Russel Westbrook</div>
-              </div>
-              <div class="player">
-                <div class="player__position">G</div>
-                <div class="player__name">Russel Westbrook</div>
-              </div>
-              <div class="player">
-                <div class="player__position">CF</div>
-                <div class="player__name">Russel Westbrook</div>
-              </div>
-              <div class="player">
-                <div class="player__position">G</div>
-                <div class="player__name">Russel Westbrook</div>
-              </div>
-              <div class="player">
-                <div class="player__position">GF</div>
-                <div class="player__name">Russel Westbrook</div>
-              </div>
-              <div class="player">
-                <div class="player__position">G</div>
-                <div class="player__name">Thanasis Antetokounmpo</div>
-              </div>
-              <div class="player">
-                <div class="player__position">G</div>
-                <div class="player__name">Russel Westbrook</div>
+              <div class="player" v-for="player in getRoaster" :key="player.personId">
+                <div class="player__position">{{ player.pos }}</div>
+                <div class="player__name">{{ player.firstName + " " + player.lastName }}</div>
               </div>
             </div>
           </div>
@@ -99,21 +88,27 @@
           <div class="card-bottom__container last-matches">
             <div class="card-bottom-container__header">Last Matches</div>
             <div class="matches">
-              <div class="match">
-                <div class="match__date-home">
-                  <div class="match-date">Aug 08</div>
-                  <div class="match-home away">AWAY</div>
+              <div class="matches-container" v-for="match in cPreviewMatches" :key="match.match.gameId">
+                <div class="match">
+                  <div class="match__date-home">
+                    <div class="match-date">{{ getDate(match.match.startTimeUTC) }}</div>
+                    <div class="match-home away" :style="{ background: match.match.isHomeTeam ? '#006BB7' : '#E7A423' }">
+                      {{ match.match.isHomeTeam ? 'HOME' : 'AWAY' }}
+                    </div>
+                  </div>
+                  <div class="match__opponent">
+                    <div class="opponent__city">{{ match.team.city }}</div>
+                    <div class="opponent__name">{{ match.team.nickname }}</div>
+                  </div>
+                  <div class="match__results">
+                    <div class="results__outcome " :class="isTeamWon(match.match) ? 'win' : 'loose'">
+                      {{ isTeamWon(match.match) ? 'W' : 'L' }}
+                    </div>
+                    <div class="results__score">{{ getScore(match.match) }}</div>
+                  </div>
                 </div>
-                <div class="match__opponent">
-                  <div class="opponent__city">Phoenix</div>
-                  <div class="opponent__name">Suns</div>
-                </div>
-                <div class="match__results">
-                  <div class="results__outcome win">W</div>
-                  <div class="results__score">73-72</div>
-                </div>
+                <div class="hl hl--matches"></div>
               </div>
-              <div class="hl hl--matches"></div>
             </div>
           </div>
         </div>
@@ -135,8 +130,12 @@ import axios from "axios";
 export default {
   data() {
     return {
+      year: "2021",
       teams: [],
-      team: null,
+      players: [],
+      playersIds: [],
+      matches: [],
+      isTeamsFetched: false,
       isTeamLoading: false,
     };
   },
@@ -147,27 +146,124 @@ export default {
         .get("https://data.nba.net/data/10s/prod/v1/" + year + "/teams.json")
         .then((response) => {
           this.teams = response.data.league.standard;
-          var BreakException = {};
-          try {
-            this.teams.forEach((team) => {
-              if (team.urlName == this.$route.params.urlName) {
-                this.team = team;
-                throw BreakException;
-              }
-            });
-          } catch (e) {
-            if (e !== BreakException) throw e;
-          }
+
           this.isTeamLoading = false;
+          this.isTeamsFetched = true;
         });
+    },
+    async fetchPlayers(year) {
+      axios
+        .get("https://data.nba.net/data/10s/prod/v1/" + year + "/players.json")
+        .then(response => {
+          this.players = response.data.league.standard;
+        })
+    },
+    async fetchPlayersIds(year){
+      axios
+        .get("https://data.nba.net/data/10s/prod/v1/" + year + "/teams/" + this.$route.params.urlName + "/roster.json")
+        .then((response) => {
+          this.playersIds = response.data.league.standard.players;
+        })
+    },
+    fetchMatches(year){
+      axios
+        .get("https://data.nba.net/data/10s/prod/v1/" + year + "/teams/" + this.$route.params.urlName + "/schedule.json")
+        .then((response) => {
+          this.matches = (response.data.league.standard).filter(match => match.statusNum == 3).reverse().splice(0, 5);
+          console.log(this.matches)
+        })
+    },
+    isTeamWon(match){
+      var teamScore, opponentScore
+      if(match.isHomeTeam){
+        teamScore = parseInt(match.hTeam.score);
+        opponentScore = parseInt(match.vTeam.score);
+      }
+      else{
+        teamScore = parseInt(match.vTeam.score);
+        opponentScore = parseInt(match.hTeam.score);
+      }
+      if (teamScore > opponentScore) return true;
+      else return false;
+    },
+    getDate(dateStr){
+      const date = new Date(dateStr);
+      return date.toLocaleString('default', { month: 'short'}) + " " + date.getDate()
+    },
+    getScore(match){
+      var teamScore, opponentScore
+      if(match.isHomeTeam){
+        teamScore = match.hTeam.score;
+        opponentScore = match.vTeam.score;
+      }
+      else{
+        teamScore = match.vTeam.score;
+        opponentScore = match.hTeam.score;
+      }
+      return teamScore + "-" + opponentScore;
+    },
+    getPreviewMatches(){
+      var previewMatches = [];
+      this.matches.forEach(match => {
+        console.log(match)
+        this.teams.forEach(team => {
+          if(team.teamId == match.vTeam.teamId){
+            previewMatches.push({match, team});
+          }
+        })
+      })
+      return previewMatches;
     },
     getTeamLogo(teamId) {
       return "https://avatars.dicebear.com/api/jdenticon/" + teamId + ".svg";
     },
   },
   mounted() {
-    this.fetchTeams("2021");
+    this.fetchTeams(this.year);
+    this.fetchPlayers(this.year);
+    this.fetchPlayersIds(this.year);
+    this.fetchMatches(this.year);
   },
+  computed:{
+    getTeam(){
+      var resTeam = null;
+      var BreakException = {};
+      try{
+        this.teams.forEach((team) => {
+          if (team.urlName === this.$route.params.urlName) {
+            resTeam = team;
+            throw BreakException;
+          }
+        })
+      } catch(e){
+        if(e !== BreakException) throw e;
+      }
+      return resTeam;
+    },
+    getRoaster(){
+      var roaster = [];
+      var i = 0;
+      var BreakException = {};
+      try{
+        this.players.forEach(player => {
+          this.playersIds.forEach(playerId => {
+            if (playerId.personId == player.personId) {
+              roaster.push(player);
+              i++;
+            }
+            if(i >= this.playersIds.length)
+              throw BreakException;
+          })
+        })
+      } catch(e){
+        if(e !== BreakException) throw e;
+      }
+      return roaster;
+    },
+    cPreviewMatches(){
+      return this.getPreviewMatches();
+    }
+  }
 };
 </script>
 
@@ -186,7 +282,6 @@ export default {
 
   align-items: center;
 
-  /* width: 95%; */
   width: 1500px;
   height: 765px;
 }
@@ -194,11 +289,16 @@ export default {
 .card__top {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 
   width: 100%;
   height: 225px;
+}
+
+.top-container{
+  display: flex;
+  flex-direction: row;
 }
 
 .contents__main {
@@ -252,7 +352,7 @@ export default {
 }
 
 .teams-button{
-  margin-left: 100px;
+  margin-right: 50px;
 }
 
 .vl {
@@ -322,7 +422,7 @@ export default {
 }
 
 .vl--bottom-containers {
-  height: 85%;
+  height: 94%;
 }
 
 .card-bottom__container {
@@ -332,6 +432,28 @@ export default {
 
 .roaster {
   width: 780px;
+}
+
+.loading {
+  margin: auto;
+  font-size: 24px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading__text {
+  font-size: 36px;
+  font-weight: bold;
+  color: #6a6a6a;
+  margin: 50px;
+}
+
+.loading__img {
+  width: 200px;
+  opacity: 90%;
 }
 
 .last-matches {
@@ -350,6 +472,7 @@ export default {
   display: flex;
   flex-flow: row wrap;
   padding-left: 20px;
+  align-items: center;
 }
 
 .player {
@@ -357,7 +480,7 @@ export default {
   font-size: 24px;
   color: #6a6a6a;
 
-  margin: 10px 0 0 0;
+  margin: 17px 0 0 0;
 
   display: flex;
   flex-direction: row;
@@ -365,7 +488,7 @@ export default {
 
 .player__position {
   font-weight: bold;
-  width: 55px;
+  width: 65px;
 }
 
 /* .player__name {
@@ -476,8 +599,10 @@ export default {
 
 .results__score{
   margin-left: 20px;
-
+  width: 90px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
 }
 
 .hl--matches {
