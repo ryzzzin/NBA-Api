@@ -204,10 +204,14 @@ export default {
     },
     getPreviewMatches(){
       var previewMatches = [];
+      var opponent = null;
       this.matches.forEach(match => {
         console.log(match)
         this.teams.forEach(team => {
-          if(team.teamId == match.vTeam.teamId){
+          if(match.isHomeTeam) opponent = match.vTeam;
+          else opponent = match.hTeam;
+
+          if(team.teamId == opponent.teamId){
             previewMatches.push({match, team});
           }
         })
