@@ -80,7 +80,9 @@
             <div class="roaster__players">
               <div class="player" v-for="player in getRoaster" :key="player.personId">
                 <div class="player__position">{{ player.pos }}</div>
-                <div class="player__name">{{ player.firstName + " " + player.lastName }}</div>
+                <router-link class="player__name" :to="'/players/' + player.personId">
+                  {{ player.firstName + " " + player.lastName }}
+                </router-link>
               </div>
             </div>
           </div>
@@ -495,9 +497,9 @@ export default {
   width: 65px;
 }
 
-/* .player__name {
-
-} */
+.player__name {
+  color: #6a6a6a;
+}
 
 .matches{
   margin-top: 10px;

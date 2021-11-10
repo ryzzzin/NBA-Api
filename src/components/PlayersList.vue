@@ -2,7 +2,7 @@
   <div>
     <div id="players-container" v-if="players.length > 0">
       <div class="players" v-for="player in players.slice(0, playersNumber)" v-bind:key="player.playerId">
-        <div class="card--player">
+        <router-link class="card--player" :to="'/players/' + player.personId">
           <div class="card--player__contents">
             <div class="contents__main">
               <div class="player-logo">
@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
     <div class="no-players" v-else>
@@ -133,6 +133,8 @@ export default {
   height: 192px;
 
   align-items: center;
+
+  text-decoration: none;
 }
 
 .card--player__contents {
