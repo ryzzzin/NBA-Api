@@ -26,7 +26,7 @@
                 <div class="player-names--fullname">
                   <div>
                     <i>
-                      <a>{{ getTeamName(getPlayer.teamId) }}</a>
+                      <a>{{ getTeam(getPlayer.teamId).fullName }}</a>
                     </i>
                   </div>
                 </div>
@@ -63,7 +63,7 @@
             <div class="card-bottom-container__header">Stats</div>
             <div class="stats">
               <div class="stat" v-for="stat in statsList" :key="stat.name">
-                <div class="stat__name">
+                <div class="stat__name" :title="stat.placeholder">
                   {{ stat.title }}
                   <div class="hl hl--stat"></div>
                 </div>
@@ -72,11 +72,41 @@
             </div>
           </div>
           <div class="vl vl--bottom-containers"></div>
-          <div class="card-bottom__container last-matches">
+          <div class="card-bottom__container team">
             <div class="card-bottom-container__header">Team</div>
-            <!-- <div class="matches">
-              
-            </div> -->
+            <div class="team-info-and-divs">
+              <div class="team-container team-info">
+                <div class="team-info__main">
+                  <div class="team-logo">
+
+                  </div>
+                  <div class="team-name">
+                    {{ getTeam(getPlayer.teamId).fullName }}
+                  </div>
+                </div>
+                <div class="team-info__params">
+                  <div class="team-info-param">
+                    <div class="param__name">Abbreviation</div>
+                    <div class="param__value"></div>
+                  </div>
+                  <div class="hl hl--params"></div>
+                  <div class="team-info-param">
+                    <div class="param__name">Conference</div>
+                    <div class="param__value"></div>
+                  </div>
+                  <div class="hl hl--params"></div>
+                  <div class="team-info-param">
+                    <div class="param__name">Division</div>
+                    <div class="param__value"></div>
+                  </div>
+                  <div class="hl hl--params"></div>
+                  <default-button>See team profile</default-button>
+                </div>
+              </div>
+              <div class="team-container divisions">
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -161,12 +191,12 @@ export default {
           this.stats = response.data.league.standard.stats;
         })
     },
-    getTeamName(teamId){
-      var teamName = "";
+    getTeam(teamId){
+      var resTeam;
       this.teams.forEach(team => {
-        if(team.teamId == teamId) teamName = team.fullName
+        if(team.teamId == teamId) resTeam = team
       });
-      return teamName;
+      return resTeam;
     },
     getPlayerLogo(personId){
       return 'https://avatars.dicebear.com/api/big-ears-neutral/' + personId + '.svg';
@@ -383,7 +413,7 @@ export default {
   opacity: 90%;
 }
 
-.last-matches {
+.team {
   width: 720px;
 }
 
