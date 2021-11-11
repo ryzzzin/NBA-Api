@@ -73,7 +73,7 @@ export default {
 
 <style scoped>
 .navbar {
-  width: 14.6%;
+  width: 280px;
   height: 100%;
 
   position: fixed;
@@ -88,13 +88,14 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .navbar-bg {
-  width: 2%;
+  width: 315px;
   height: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 14.6%;
+  left: 0;
   overflow-x: hidden;
   background: #006bb7;
 }

@@ -54,7 +54,7 @@ body {
 }
 
 .content{
-  margin-left: 16.6%;
+  margin-left: 310px;
   padding-top: 50px;
   padding-left: 50px;
 }

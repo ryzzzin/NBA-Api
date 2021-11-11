@@ -504,7 +504,8 @@ export default {
 .team-info-and-divs{
   display: flex;
   flex-direction: row;
-  padding-top: 50px;
+
+  margin-top: 20px;
 }
 
 .team-logo {
@@ -534,6 +535,7 @@ export default {
 }
 
 .team-info{
+  margin-top: 30px;
   margin-left: 50px;
 }
 
