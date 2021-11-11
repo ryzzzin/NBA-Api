@@ -78,7 +78,7 @@
               <div class="team-container team-info">
                 <div class="team-info__main">
                   <div class="team-logo">
-
+                    <img class="team-logo__img" :src="getTeamLogo(getPlayer.teamId)" alt="Team's Logo">
                   </div>
                   <div class="team-name">
                     {{ getTeam(getPlayer.teamId).fullName }}
@@ -87,24 +87,62 @@
                 <div class="team-info__params">
                   <div class="team-info-param">
                     <div class="param__name">Abbreviation</div>
-                    <div class="param__value"></div>
+                    <div class="param__value">{{ getTeam(getPlayer.teamId).tricode }}</div>
                   </div>
                   <div class="hl hl--params"></div>
                   <div class="team-info-param">
                     <div class="param__name">Conference</div>
-                    <div class="param__value"></div>
+                    <div class="param__value">{{ getTeam(getPlayer.teamId).confName }}</div>
                   </div>
                   <div class="hl hl--params"></div>
                   <div class="team-info-param">
                     <div class="param__name">Division</div>
-                    <div class="param__value"></div>
+                    <div class="param__value">{{ getTeam(getPlayer.teamId).divName }}</div>
                   </div>
                   <div class="hl hl--params"></div>
-                  <default-button>See team profile</default-button>
+                  <router-link :to="'/teams/' + getTeam(getPlayer.teamId).urlName">
+                    <default-button class="team-button">See team profile</default-button>
+                  </router-link>
                 </div>
               </div>
+              <div class="vl vl--team"></div>
               <div class="team-container divisions">
-
+                <div class="conference">
+                  <div class="conference__name conf-east">East</div>
+                  <div class="vl vl--conf"></div>
+                  <div class="divisions__names">
+                    <div class="division">
+                      <div class="division__color div-atlantic"></div>
+                      <div class="division__name">Atlantic</div>
+                    </div>
+                    <div class="division">
+                      <div class="division__color div-central"></div>
+                      <div class="division__name">Central</div>
+                    </div>
+                    <div class="division">
+                      <div class="division__color div-southeast"></div>
+                      <div class="division__name">Southeast</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="conference">
+                  <div class="conference__name conf-west">West</div>
+                  <div class="vl vl--conf"></div>
+                  <div class="divisions__names">
+                    <div class="division">
+                      <div class="division__color div-southwest"></div>
+                      <div class="division__name">Southwest</div>
+                    </div>
+                    <div class="division">
+                      <div class="division__color div-northwest"></div>
+                      <div class="division__name">Northwest</div>
+                    </div>
+                    <div class="division">
+                      <div class="division__color div-pacific"></div>
+                      <div class="division__name">Pacific</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -197,6 +235,9 @@ export default {
         if(team.teamId == teamId) resTeam = team
       });
       return resTeam;
+    },
+    getTeamLogo(teamId){
+      return 'https://avatars.dicebear.com/api/jdenticon/' + teamId + '.svg';
     },
     getPlayerLogo(personId){
       return 'https://avatars.dicebear.com/api/big-ears-neutral/' + personId + '.svg';
@@ -426,7 +467,7 @@ export default {
 }
 
 .stats-container {
-  width: 780px;
+  width: 550px;
 }
 
 .stats {
@@ -460,15 +501,159 @@ export default {
   width: 160%;
 }
 
-/* .matches{
-  margin-top: 10px;
+.team-info-and-divs{
+  display: flex;
+  flex-direction: row;
+  padding-top: 50px;
+}
+
+.team-logo {
+  width: 75px;
+  height: 75px;
+
+  margin-right: 24px;
+
+  background: #e6e6e6;
+  box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
 
   display: flex;
-  flex-direction: column;
-  align-self: center;
   justify-content: center;
   align-items: center;
-  
-} */
+}
+
+.team-logo__img {
+  width: 45px;
+}
+
+.team-name{
+  font-size: 24px;
+  color: #6A6A6A;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.team-info{
+  margin-left: 50px;
+}
+
+.team-info__main{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.team-info__params{
+  margin-top: 20px;
+  margin-left: 100px;
+  width: 250px;
+  font-size: 24px;
+  color: #6A6A6A;
+}
+
+.team-info-param{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.param__name{
+  margin-left: 10px;
+}
+
+.param__value{
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.hl--params{
+  margin-bottom: 13px;
+}
+
+.team-button{
+  margin-left: 25px;
+  margin-top: 19px;
+}
+
+.vl--team{
+  margin: 0 50px 0 70px;
+  height: 100%;
+}
+
+.divisions{
+  margin-top: 20px;
+}
+
+.conference{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  font-size: 24px;
+
+  margin-bottom: 30px;
+}
+
+.conference__name{
+  font-weight: bold;
+  width: 55px;
+}
+
+.conf-east{
+  color: #055790;
+}
+
+.conf-west{
+  color: #B90A34;
+}
+
+.vl--conf{
+  margin: 0 12px 0 24px;
+  height: 150px;
+}
+
+.divisions__names{
+  display: flex;
+  flex-direction: column;
+}
+
+.division{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.division__name{
+  color: #6A6A6A;
+  margin-left: 16px;
+}
+
+.division__color{
+  width: 40px;
+  height: 40px;
+}
+
+.div-atlantic{
+  background: #055790;
+}
+.div-central{
+  background: #006BB7;
+}
+.div-southeast{
+  background: #57A3D9;
+}
+.div-southwest{
+  background: #B90A35;
+}
+.div-northwest{
+  background: #ED174B;
+}
+.div-pacific{
+  background: #FA4F79;
+}
+
 
 </style>
