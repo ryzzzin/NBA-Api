@@ -98,10 +98,10 @@
                       {{ match.match.isHomeTeam ? 'HOME' : 'AWAY' }}
                     </div>
                   </div>
-                  <div class="match__opponent">
+                  <router-link class="match__opponent" :to="'/teams/' + match.team.urlName">
                     <div class="opponent__city">{{ match.team.city }}</div>
                     <div class="opponent__name">{{ match.team.nickname }}</div>
-                  </div>
+                  </router-link>
                   <div class="match__results">
                     <div class="results__outcome " :class="isTeamWon(match.match) ? 'win' : 'loose'">
                       {{ isTeamWon(match.match) ? 'W' : 'L' }}
@@ -161,6 +161,7 @@ export default {
         })
     },
     async fetchPlayersIds(year){
+      this.playersIds = []
       axios
         .get("https://data.nba.net/data/10s/prod/v1/" + year + "/teams/" + this.$route.params.urlName + "/roster.json")
         .then((response) => {
@@ -168,6 +169,7 @@ export default {
         })
     },
     fetchMatches(year){
+      this.matches = []
       axios
         .get("https://data.nba.net/data/10s/prod/v1/" + year + "/teams/" + this.$route.params.urlName + "/schedule.json")
         .then((response) => {
@@ -229,6 +231,12 @@ export default {
     this.fetchPlayers(this.year);
     this.fetchPlayersIds(this.year);
     this.fetchMatches(this.year);
+  },
+  watch:{
+    '$route'(){
+      this.fetchPlayersIds(this.year);
+      this.fetchMatches(this.year);
+    }
   },
   computed:{
     getTeam(){
@@ -563,6 +571,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  color: #6a6a6a;
 }
 
 .opponent__city{
