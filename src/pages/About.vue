@@ -2,25 +2,16 @@
   <div class="content__main">
     <div class="page-name">About</div>
     <div class="about">
-      <div class="about-preview">
-        <img
-          class="about-preview-img"
-          src="@/assets/images/about.jpeg"
-          alt=""
-        />
-        <div class="about-preview-info">
-          <h1 class="about-header">About this project</h1>
-          <p class="about-desc">
-            This project was created with
-            <a class="vue-link" href="https://vuejs.org/" target="_blank">Vue</a> using the
-            <a href="https://nba.com" target="_blank">
-                <span class="letter--blue">N</span>B<span class="letter--red">A</span>
-            </a>
-            -API to create a client-side user interface for NBA basketball league
-            data.
-          </p>
-        </div>
-      </div>
+      <p class="about-desc">
+        This project was created with
+        <a class="vue-link" href="https://vuejs.org/" target="_blank">Vue</a> using the
+        <a href="https://nba.com" target="_blank">
+            <span class="letter--blue">N</span>B<span class="letter--red">A</span>
+        </a>
+        -API to create a client-side user interface for NBA basketball league
+        data.
+      </p>
+      <img src="@/assets/svg/about-this-project.svg" class="page-img">
     </div>
   </div>
 </template>
@@ -47,53 +38,21 @@ export default {};
 }
 
 .about {
-  background: #212121;
-  margin: 20px 0px;
+  height: 500px;
+
   display: flex;
-  width: 94%;
-  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 100px;
 }
-.about-preview {
-  width: 100%;
-  height: 79vh;
-  transition: 1s;
-  display: flex;
-  overflow: hidden;
-}
-.about-preview-img {
-  object-fit: cover;
-  width: 54%;
-  height: 100%;
-  transition: 1s;
-}
-.about-preview:hover .about-preview-img {
-  width: 100%;
-  height: 100%;
-}
-.about-preview-info {
-  position: absolute;
-  top: 15%;
-  left: 60%;
-}
-.about-header {
-  padding: 0px 10px;
-  font-size: 55px;
-  width: 85%;
-  mix-blend-mode: lighten;
-  background-blend-mode: multiply;
-  background-color: white;
-  color: black;
-}
+
 .about-desc {
-  margin-top: 2%;
-  font-size: 24px;
-  padding: 15px;
-  width: 85%;
-  mix-blend-mode: lighten;
-  background-blend-mode: multiply;
-  background-color: black;
-  color: white;
-  text-align: end;
+  font-size: 26px;
+  width: 54%;
+  color: #212121;
+  text-align: center;
 }
 
 .vue-link {
@@ -101,7 +60,7 @@ export default {};
 }
 
 a{
-    color: white;
+  color: #c4c4c4;
 }
 
 .letter--blue {
@@ -109,5 +68,17 @@ a{
 }
 .letter--red {
   color: #ed174b;
+}
+
+.page-img{
+  height: 200px;
+  margin-top: 60px;
+  opacity: 90%;
+  transition: 0.5s;
+}
+
+.page-img:hover{
+  height: 220px;
+  transition: 0.5s;
 }
 </style>
