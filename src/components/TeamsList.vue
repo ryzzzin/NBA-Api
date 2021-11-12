@@ -88,18 +88,24 @@ export default {
   border: 2px solid #c4c4c4;
   box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.25);
   border-radius: 24px;
-
-  display: flex;
+  text-decoration: none;
 
   padding: 13px 22px 13px 22px;
-  margin: 25px 25px 0px 0px;
-
+  margin: 12px;
   width: 735px;
   height: 192px;
-
+  display: flex;
   align-items: center;
 
-  text-decoration: none;
+  transition: 0.1s;
+}
+
+.card--team:hover{
+  background: #e9e9e9;
+  width: 745px;
+  height: 202px;
+  margin: 7px;
+  transition: 0.2s;
 }
 
 .card--team__contents {
