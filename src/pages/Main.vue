@@ -57,6 +57,6 @@
     }
 
     .page-img{
-        height: 27vh;
+        height: 280px;
     }
 </style>
