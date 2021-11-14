@@ -24,7 +24,7 @@
           
         </div>
       </div>
-      <players-list :players="sortedAndSearchedPlayers" :teams="teams" v-if="!isPlayerLoading" />
+      <players-list :players="sortedAndSearchedPlayers" :year="selectedYear" :teams="teams" v-if="!isPlayerLoading" />
       <div class="loading" v-else>
         <div class="loading__text">Loading...</div>
         <img class="loading__img" src="@/assets/svg/loading.svg" />

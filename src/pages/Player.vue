@@ -1,8 +1,8 @@
 <template>
   <div class="contents">
-    <div class="contents__search">
+    <!-- <div class="contents__search">
       <search-input v-model="searchQuery" />
-    </div>
+    </div> -->
     <div class="contents__header">
       <div class="page-name">Players</div>
     </div>
@@ -54,7 +54,6 @@
             <router-link to="/players">
               <default-button class="players-button">All players</default-button>
             </router-link>
-            <default-button class="players-button">All the matches</default-button>
           </div>
         </div>
         <div class="hl hl--player"></div>
@@ -100,7 +99,7 @@
                     <div class="param__value">{{ getTeam(getPlayer.teamId).divName }}</div>
                   </div>
                   <div class="hl hl--params"></div>
-                  <router-link :to="'/teams/' + getTeam(getPlayer.teamId).urlName">
+                  <router-link :to="'/teams/' + getTeam(getPlayer.teamId).urlName + ((year) ? ('?year=' + year) : '')">
                     <default-button class="team-button">See team profile</default-button>
                   </router-link>
                 </div>
@@ -203,6 +202,7 @@ export default {
       ],
       isTeamsFetched: false,
       isPlayerLoading: true,
+      searchQuery: ''
     };
   },
   methods: {
@@ -244,6 +244,7 @@ export default {
     },
   },
   mounted() {
+    if(this.$route.query.year) this.year = this.$route.query.year;
     this.fetchTeams(this.year);
     this.fetchPlayers(this.year);
     this.fetchPlayerStats(this.year);

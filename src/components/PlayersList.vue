@@ -2,7 +2,7 @@
   <div>
     <div id="players-container" v-if="players.length > 0">
       <div class="players" v-for="player in players.slice(0, playersNumber)" v-bind:key="player.playerId">
-        <router-link class="card--player" :to="'/players/' + player.personId">
+        <router-link class="card--player" :to="'/players/' + player.personId + ((year) ? ('?year=' + year) : '')">
           <div class="card--player__contents">
             <div class="contents__main">
               <div class="player-logo">
@@ -65,6 +65,10 @@ export default {
     }
   },
   props: {
+    year:{
+      type: String,
+      required: false
+    },
     players: {
       type: Array,
       required: true,

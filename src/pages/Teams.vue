@@ -18,7 +18,7 @@
           </sort-select>
         </div>
       </div>
-      <teams-list :teams="sortedAndSearchedTeams" v-if="!isTeamLoading" />
+      <teams-list :teams="sortedAndSearchedTeams" :year="selectedYear" v-if="!isTeamLoading" />
       <div class="loading" v-else>
         <div class="loading__text">Loading...</div>
         <img class="loading__img" src="@/assets/svg/loading.svg" />

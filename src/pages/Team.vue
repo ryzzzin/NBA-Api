@@ -1,8 +1,8 @@
 <template>
   <div class="contents">
-    <div class="contents__search">
+    <!-- <div class="contents__search">
       <search-input v-model="searchQuery" />
-    </div>
+    </div> -->
     <div class="contents__header">
       <div class="page-name">Teams</div>
     </div>
@@ -70,26 +70,29 @@
             <router-link to="/teams">
               <default-button class="teams-button">All teams</default-button>
             </router-link>
-            <default-button class="teams-button">All the matches</default-button>
+            <router-link :to="'/games/' + getTeam.urlName + ((year) ? ('?year=' + year) : '')">
+              <default-button class="teams-button">All the matches</default-button>
+            </router-link>
           </div>
         </div>
         <div class="hl hl--team"></div>
         <div class="card__bottom">
           <div class="card-bottom__container roaster">
             <div class="card-bottom-container__header">Roaster</div>
-            <div class="roaster__players">
+            <div class="roaster__players" v-if="getRoaster[0]">
               <div class="player" v-for="player in getRoaster" :key="player.personId">
-                <div class="player__position">{{ player.pos }}</div>
-                <router-link class="player__name" :to="'/players/' + player.personId">
+                <div class="player__position"><u>{{ player.pos }}</u></div>
+                <router-link class="player__name" :to="'/players/' + player.personId + ((year) ? ('?year=' + year) : '')">
                   {{ player.firstName + " " + player.lastName }}
                 </router-link>
               </div>
             </div>
+            <img class="loading-min" src="@/assets/gif/loading.gif" v-else>
           </div>
           <div class="vl vl--bottom-containers"></div>
           <div class="card-bottom__container last-matches">
             <div class="card-bottom-container__header">Last Matches</div>
-            <div class="matches">
+            <div class="matches" v-if="cPreviewMatches[0]">
               <div class="matches-container" v-for="match in cPreviewMatches" :key="match.match.gameId">
                 <div class="match">
                   <div class="match__date-home">
@@ -98,7 +101,7 @@
                       {{ match.match.isHomeTeam ? 'HOME' : 'AWAY' }}
                     </div>
                   </div>
-                  <router-link class="match__opponent" :to="'/teams/' + match.team.urlName">
+                  <router-link class="match__opponent" :to="'/teams/' + match.team.urlName + ((year) ? ('?year=' + year) : '')">
                     <div class="opponent__city">{{ match.team.city }}</div>
                     <div class="opponent__name">{{ match.team.nickname }}</div>
                   </router-link>
@@ -112,6 +115,7 @@
                 <div class="hl hl--matches"></div>
               </div>
             </div>
+            <img class="loading-min" src="@/assets/gif/loading.gif" v-else>
           </div>
         </div>
       </div>
@@ -139,6 +143,7 @@ export default {
       matches: [],
       isTeamsFetched: false,
       isTeamLoading: false,
+      searchQuery: ''
     };
   },
   methods: {
@@ -227,6 +232,7 @@ export default {
     },
   },
   mounted() {
+    if(this.$route.query.year) this.year = this.$route.query.year;
     this.fetchTeams(this.year);
     this.fetchPlayers(this.year);
     this.fetchPlayersIds(this.year);
@@ -282,6 +288,13 @@ export default {
 </script>
 
 <style scoped>
+.loading-min{
+  height: 200px;
+  width: 200px;
+  align-self: center;
+  margin: auto;
+}
+
 .card {
   background: #f6f6f6;
   border: 2px solid #c4c4c4;
@@ -573,10 +586,6 @@ export default {
   align-items: center;
 
   color: #6a6a6a;
-}
-
-.opponent__city{
-
 }
 
 .opponent__name{

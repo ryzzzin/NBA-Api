@@ -2,7 +2,7 @@
   <div>
     <div id="teams-container" v-if="teams.length > 0">
       <div class="teams" v-for="team in teams" :key="team.teamId">
-        <router-link class="card--team" :to="'/teams/' + team.urlName">
+        <router-link class="card--team" :to="'/teams/' + team.urlName + ((year) ? ('?year=' + year) : '')">
           <div class="card--team__contents">
             <div class="contents__main">
               <div class="team-logo">
@@ -57,6 +57,10 @@
 <script>
 export default {
   props: {
+    year: {
+      type: String,
+      required: false
+    },
     teams: {
       type: Array,
       required: true,
