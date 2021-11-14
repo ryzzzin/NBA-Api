@@ -249,7 +249,6 @@ export default {
 
 .no-players__img{
   width: 300px;
-  opacity: 90%;
 }
 
 </style>

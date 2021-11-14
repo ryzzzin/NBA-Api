@@ -408,7 +408,6 @@ export default {
 
 .no-players__img {
   width: 300px;
-  opacity: 90%;
 }
 
 .hl--player {
@@ -452,7 +451,6 @@ export default {
 
 .loading__img {
   width: 200px;
-  opacity: 90%;
 }
 
 .team {

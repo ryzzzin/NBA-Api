@@ -432,7 +432,6 @@ export default {
 
 .no-teams__img {
   width: 300px;
-  opacity: 90%;
 }
 
 .hl--team {
@@ -480,7 +479,6 @@ export default {
 
 .loading__img {
   width: 200px;
-  opacity: 90%;
 }
 
 .last-matches {

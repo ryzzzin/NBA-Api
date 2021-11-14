@@ -211,7 +211,6 @@ export default {
 
 .no-teams__img{
   width: 300px;
-  opacity: 90%;
 }
 
 </style>

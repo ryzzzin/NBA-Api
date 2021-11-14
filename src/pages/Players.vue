@@ -189,6 +189,5 @@ export default {
 
 .loading__img {
   width: 200px;
-  opacity: 90%;
 }
 </style>
