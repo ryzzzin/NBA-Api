@@ -27,9 +27,15 @@
     padding-right: 20px;
 
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.button:hover{
+    background: #e1e1e1;
+    transition: 0.2s;
 }
 
 .button:active{
-    background: #e1e1e1;
+    background: #cecece;
 }
 </style>
