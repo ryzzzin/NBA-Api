@@ -4,6 +4,7 @@ import Player from '@/pages/Player'
 import Teams from '@/pages/Teams'
 import Team from '@/pages/Team'
 import About from '@/pages/About'
+import Games from '@/pages/Games'
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -31,6 +32,10 @@ const routes = [
     {
         path: '/players/:personId',
         component: Player
+    },
+    {
+        path: '/games/:urlName',
+        component: Games
     }
 ]
 
