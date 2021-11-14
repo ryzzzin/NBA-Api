@@ -35,8 +35,7 @@
 
     width: 60px;
     height: 60px;
-    background: #212121;
-    opacity: 90%;
+    background: rgba(33, 33, 33, 0.9);
     color: #f6f6f6;
     font-size: 30px;
 
@@ -53,8 +52,7 @@
 .top:hover{
     width: 70px;
     height: 70px;
-    background: #464646;
-    opacity: 50%;
+    background: rgba(70, 70, 70, 0.5);
     transition: 0.5s;
 }
 

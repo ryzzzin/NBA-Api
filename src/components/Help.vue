@@ -17,8 +17,7 @@
 
     width: 60px;
     height: 60px;
-    background: #212121;
-    opacity: 90%;
+    background: rgba(33, 33, 33, 0.9);
     color: #f6f6f6;
     font-size: 30px;
 
@@ -35,8 +34,7 @@
 
 .help__btn:hover{
     font-size: 35px;
-    background: #464646;
-    opacity: 50%;
+    background: rgba(70, 70, 70, 0.5);
     width: 70px;
     height: 70px;
     transition: 0.5s;
